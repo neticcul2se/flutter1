@@ -1,8 +1,18 @@
+import 'package:firstapp/pages/photo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class HomePage extends StatelessWidget {
+class Homepage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _HomepageState();
+  }
+}
+
+class _HomepageState extends State<Homepage> {
+  String message;
+  var _usernameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +32,7 @@ class HomePage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline6,
                 decoration: InputDecoration(labelText: 'Username'),
+                controller: _usernameController,
               ),
             ),
             Padding(
@@ -37,14 +48,24 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 RaisedButton(
-                  onPressed: () =>
-                    print("xxxx2")
-                  ,
+                  onPressed: () {
+                    // message = _usernameController.text;
+                    // setState(() {
+
+                    // });
+                    Navigator.pushNamed(context, '/photo-page');
+                    print("xxx");
+                  },
                   child: Text('login'),
                 ),
                 RaisedButton(
-                  onPressed: (){
-                    print("zzz");
+                  onPressed: () {
+                    setState(() {
+                      message = _usernameController.text;
+                    });
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PhotoPage()));
+                    
                   },
                   child: Text('Register'),
                 ),
@@ -54,6 +75,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Center(child: Text('2019 \u00a9 wachira studio')),
             ),
+            (message != null) ? Text(message) : Container(),
           ],
         ),
       ),
