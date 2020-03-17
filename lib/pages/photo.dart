@@ -18,8 +18,10 @@ class _PhotoPageState extends State<PhotoPage> {
         title: Text('Photo show'),
       ),
       body: Column(
-        children: list.map((element) {
-          return Text(element);
+        children: list.where((element)=> element !='yy').map((element) {
+       
+            return Text(element);
+
         }).toList(),
       ),
     );
