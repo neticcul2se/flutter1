@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firstapp/models/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -12,10 +13,10 @@ class PhotoPage extends StatefulWidget {
 
 class _PhotoPageState extends State<PhotoPage> {
   List<String> list = ['xx', 'yy', 'zz'];
-  var user = {};
+
   @override
   Widget build(BuildContext context) {
-    String args = ModalRoute.of(context).settings.arguments;
+    List<String>  args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Photo show'),
@@ -31,10 +32,13 @@ class _PhotoPageState extends State<PhotoPage> {
     body: RaisedButton(child: Text('ok'),
     
     onPressed: (){
-      user['username'] = 'admin';
-      user['password'] = '1234';
-      String jsonStr = json.encode(user);
-            print(jsonStr);
+
+      var login = Login();
+      login.username = args[0];
+      login.password = args[1];
+      String jsonStr = loginToJson(login);
+
+        print(jsonStr);
 
     },),
     );

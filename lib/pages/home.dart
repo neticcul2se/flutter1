@@ -13,6 +13,8 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   String message;
   var _usernameController = TextEditingController();
+  var _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +44,7 @@ class _HomepageState extends State<Homepage> {
                 style: Theme.of(context).textTheme.headline6,
                 obscureText: true,
                 decoration: InputDecoration(labelText: 'Password'),
+                controller: _passwordController,
               ),
             ),
             Row(
@@ -49,11 +52,14 @@ class _HomepageState extends State<Homepage> {
               children: <Widget>[
                 RaisedButton(
                   onPressed: () {
-                   message = _usernameController.text;
+                    message = _usernameController.text;
                     // setState(() {
 
                     // });
-                    Navigator.pushNamed(context, '/photo-page',arguments: _usernameController.text );
+                    Navigator.pushNamed(context, '/photo-page', arguments: [
+                      _usernameController.text,
+                      _passwordController.text
+                    ]);
                     print("xxx");
                   },
                   child: Text('login'),
@@ -65,7 +71,6 @@ class _HomepageState extends State<Homepage> {
                     });
                     // Navigator.push(context,
                     //     MaterialPageRoute(builder: (context) => PhotoPage(_usernameController.text)));
-                    
                   },
                   child: Text('Register'),
                 ),
