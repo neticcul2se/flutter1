@@ -9,10 +9,14 @@ class PhotoPage extends StatefulWidget {
 class _PhotoPageState extends State<PhotoPage> {
   @override
   Widget build(BuildContext context) {
+
+     String args = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Photo show'),
       ),
+      body: Text(args),
 
     );
   }

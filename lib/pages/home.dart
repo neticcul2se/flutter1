@@ -49,11 +49,11 @@ class _HomepageState extends State<Homepage> {
               children: <Widget>[
                 RaisedButton(
                   onPressed: () {
-                    // message = _usernameController.text;
+                   message = _usernameController.text;
                     // setState(() {
 
                     // });
-                    Navigator.pushNamed(context, '/photo-page');
+                    Navigator.pushNamed(context, '/photo-page',arguments: _usernameController.text );
                     print("xxx");
                   },
                   child: Text('login'),
