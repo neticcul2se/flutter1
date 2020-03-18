@@ -1,11 +1,6 @@
-import 'dart:convert';
-
-import 'package:firstapp/models/login.dart';
 import 'package:firstapp/models/photos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-
 import 'package:flutter/services.dart';
 
 class PhotoPage extends StatefulWidget {
@@ -16,11 +11,11 @@ class PhotoPage extends StatefulWidget {
 }
 
 class _PhotoPageState extends State<PhotoPage> {
-  List<String> list = ['xx', 'yy', 'zz'];
-
+  List<Photo> photos;
   @override
   Widget build(BuildContext context) {
     List<String> args = ModalRoute.of(context).settings.arguments;
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Photo show'),
@@ -33,24 +28,40 @@ class _PhotoPageState extends State<PhotoPage> {
       //   }).toList(),
       // ),
 
-      body: RaisedButton(
-        child: Text('ok'),
-        onPressed: () {
-          // var login = Login();
-          // login.username = args[0];
-          // login.password = args[1];
-          // String jsonStr = loginToJson(login);
+      body: ListView(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              RaisedButton(
+                child: Text('load data'),
+                onPressed: () {
+                  Future<String> photosJson =
+                      rootBundle.loadString('json/photos.json');
+                  photosJson.then((value) {
+                    photos = photoFromJson(value);
+                    print(photos.length);
+                  });
+                },
+              ),
+              RaisedButton(
+                child: Text('read'),
+                onPressed: () {
+                  setState(() {
 
-          // print(jsonStr);
-
-          Future<String> photosJson = rootBundle.loadString('json/photo.json');
-          photosJson.then((value) {
-
-              List<Photos> photos = photosFromJson(value);
-              print(photos.length);
-          });
-
-        },
+                     print('zzzz');
+                  });
+                },
+              ),
+            ],
+          ),
+          (photos != null)
+              ? Column(
+                  children: photos.map((photo) {
+                  return Card(child:ListTile(title: Text(photo.title),))
+                }).toList())
+              : Container()
+           
+        ],
       ),
     );
   }
