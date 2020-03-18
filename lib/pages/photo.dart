@@ -15,7 +15,7 @@ class _PhotoPageState extends State<PhotoPage> {
   @override
   Widget build(BuildContext context) {
     List<String> args = ModalRoute.of(context).settings.arguments;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Photo show'),
@@ -47,8 +47,7 @@ class _PhotoPageState extends State<PhotoPage> {
                 child: Text('read'),
                 onPressed: () {
                   setState(() {
-
-                     print('zzzz');
+                    print('zzzz');
                   });
                 },
               ),
@@ -56,11 +55,18 @@ class _PhotoPageState extends State<PhotoPage> {
           ),
           (photos != null)
               ? Column(
-                  children: photos.map((photo) {
-                  return Card(child:ListTile(title: Text(photo.title),))
+                  children: photos.getRange(0, 5).map((photo) {
+                  return Card(
+                    child: ListTile(
+                      title: Text(photo.title),
+                      leading: Image.network(
+                        photo.thumbnailUrl,
+                        width: 50,
+                      ),
+                    ),
+                  );
                 }).toList())
               : Container()
-           
         ],
       ),
     );

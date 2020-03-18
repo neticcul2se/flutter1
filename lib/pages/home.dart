@@ -66,13 +66,16 @@ class _HomepageState extends State<Homepage> {
                 ),
                 RaisedButton(
                   onPressed: () {
+                    Navigator.pushNamed(context, '/native-page');
                     setState(() {
-                      message = _usernameController.text;
+                      // message = _usernameController.text;
                     });
                     // Navigator.push(context,
                     //     MaterialPageRoute(builder: (context) => PhotoPage(_usernameController.text)));
                   },
-                  child: Text('Register'),
+
+                  child: Text('Native'),
+                
                 ),
               ],
             ),
